@@ -1,5 +1,5 @@
-interface IState {
+class IState {
     public:
-        virtual ~IState() {}
+        virtual ~IState() {};
         virtual void Update() = 0;
 }
