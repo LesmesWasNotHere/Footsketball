@@ -20,4 +20,4 @@ class Position
         double _X;
         double _Y;
         double _Z;
-}
+};

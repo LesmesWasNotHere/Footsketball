@@ -1,5 +1,5 @@
 class IState {
     public:
         virtual ~IState() {};
-        virtual void Update() = 0;
-}
+        virtual void Update(unsigned milis) = 0;
+};
