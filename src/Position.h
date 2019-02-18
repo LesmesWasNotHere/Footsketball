@@ -5,11 +5,11 @@ class Position
         Position(double x, double y, double z);
 
         double GetX() const;
-        double SetX(double x);
+        void SetX(double x);
         double GetY() const;
-        double SetY(double y);
+        void SetY(double y);
         double GetZ() const;
-        double SetZ(double z);
+        void SetZ(double z);
 
         double SquareDistance2D(Position position) const;
         double Distance2D(Position position) const;

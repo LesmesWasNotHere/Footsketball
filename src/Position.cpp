@@ -18,7 +18,7 @@ double Position::GetX() const
     return _X;
 }
 
-double Position::SetX(double x)
+void Position::SetX(double x)
 {
     _X = x;
 }
@@ -28,7 +28,7 @@ double Position::GetY() const
     return _Y;
 }
 
-double Position::SetY(double y)
+void Position::SetY(double y)
 {
     _Y = y;
 }
@@ -38,7 +38,7 @@ double Position::GetZ() const
     return _Z;
 }
 
-double Position::SetZ(double z)
+void Position::SetZ(double z)
 {
     _Z = z;
 }
