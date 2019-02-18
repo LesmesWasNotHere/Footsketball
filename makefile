@@ -3,7 +3,7 @@ CC=g++
 CFLAGS=-I .
 
 Footsketball: src/Main.cpp obj/Animation.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SpriteCache.o
-	$(CC) -o $@ $? -lSDL2 -lSDL2_image
+	$(CC) -o $@ $^ -lSDL2 -lSDL2_image
 	
 obj/Animation.o: src/Animation.cpp src/Animation.h
 	$(CC) -c -o $@ src/Animation.cpp

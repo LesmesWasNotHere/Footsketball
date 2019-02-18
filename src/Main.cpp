@@ -1,9 +1,10 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "SpriteCache.h"
 #include <iostream>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 int main(int argc, char* args[]) {
     //The window we'll be rendering to 
@@ -31,10 +32,14 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
+    SpriteCache spriteCache;
+
+    spriteCache.Load("graphics/field.png", "FIELD");
+
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
-    //Fill the surface white 
-    SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) ); 
+    //Paint field!
+    SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
     //Update the surface 
     SDL_UpdateWindowSurface( window ); 
     //Wait two seconds 
