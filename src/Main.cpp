@@ -35,15 +35,19 @@ int main(int argc, char* args[]) {
     SpriteCache spriteCache;
 
     spriteCache.Load("graphics/field.png", "FIELD");
+    spriteCache.Load("graphics/ball.png", "BALL");
+    spriteCache.Load("graphics/Cabueñes_Hugo.png", "CAB_HUGO");
 
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
     //Paint field!
     SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
+    SDL_BlitSurface(spriteCache.GetSprite("CAB_HUGO"), NULL, screenSurface, NULL);
+    SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
     //Update the surface 
     SDL_UpdateWindowSurface( window ); 
-    //Wait two seconds 
-    SDL_Delay( 2000 ); 
+    //Wait 8 seconds 
+    SDL_Delay( 8000 ); 
 
     //Destroy window 
     SDL_DestroyWindow( window ); 
