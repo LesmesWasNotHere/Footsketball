@@ -1,4 +1,4 @@
-#include "SpriteCache.h" 
+#include "SDLSpriteCache.h" 
 #include "SDL2/SDL_image.h"
 #include <cassert>
 

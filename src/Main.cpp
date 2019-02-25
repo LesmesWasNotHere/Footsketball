@@ -1,6 +1,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "SpriteCache.h"
+#include "SDLSpriteCache.h"
+#include "Animation.h"
 #include <iostream>
 
 const int SCREEN_WIDTH = 800;
@@ -38,16 +39,60 @@ int main(int argc, char* args[]) {
     spriteCache.Load("graphics/ball.png", "BALL");
     spriteCache.Load("graphics/Cabueñes_Hugo.png", "CAB_HUGO");
 
+    Animation hugo1("RUN_DOWN", 8);
+    hugo1.AddFrame("CAB_HUGO", 14, 0, 14, 30);
+    hugo1.AddFrame("CAB_HUGO", 28, 0, 14, 30);
+    hugo1.AddFrame("CAB_HUGO", 42, 0, 14, 30);
+    hugo1.AddFrame("CAB_HUGO", 56, 0, 14, 30);
+
+    Animation hugo2("RUN_UP", 8);
+    hugo2.AddFrame("CAB_HUGO", 14, 30, 14, 30);
+    hugo2.AddFrame("CAB_HUGO", 28, 30, 14, 30);
+    hugo2.AddFrame("CAB_HUGO", 42, 30, 14, 30);
+    hugo2.AddFrame("CAB_HUGO", 56, 30, 14, 30);
+
+    Animation hugo3("RUN_RIGHT", 8);
+    hugo3.AddFrame("CAB_HUGO", 14, 60, 14, 30);
+    hugo3.AddFrame("CAB_HUGO", 28, 60, 14, 30);
+    hugo3.AddFrame("CAB_HUGO", 42, 60, 14, 30);
+    hugo3.AddFrame("CAB_HUGO", 56, 60, 14, 30);
+
+    Animation hugo4("RUN_LEFT", 8);
+    hugo4.AddFrame("CAB_HUGO", 14, 90, 14, 30);
+    hugo4.AddFrame("CAB_HUGO", 28, 90, 14, 30);
+    hugo4.AddFrame("CAB_HUGO", 42, 90, 14, 30);
+    hugo4.AddFrame("CAB_HUGO", 56, 90, 14, 30);
+
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
-    //Paint field!
-    SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
-    SDL_BlitSurface(spriteCache.GetSprite("CAB_HUGO"), NULL, screenSurface, NULL);
-    SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
-    //Update the surface 
-    SDL_UpdateWindowSurface( window ); 
-    //Wait 8 seconds 
-    SDL_Delay( 8000 ); 
+    int lastTicks =  SDL_GetTicks();
+    int frameTicks;
+    int milisFrame;
+    for (int i=0; i<2000; ++i)
+    {
+        frameTicks = SDL_GetTicks();
+        milisFrame = frameTicks - lastTicks;
+        lastTicks = frameTicks;
+
+        //Update animation
+        hugo3.Update(milisFrame);
+
+        AnimationFrame frame = hugo3.GetCurrentFrame();
+
+        //Paint field!
+        SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
+
+        SDL_Rect rect;
+        rect.x = frame.x;
+        rect.y = frame.y;
+        rect.w = frame.w;
+        rect.h = frame.h;
+
+        SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &rect, screenSurface, NULL);
+        //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
+        //Update the surface 
+        SDL_UpdateWindowSurface( window ); 
+    }
 
     //Destroy window 
     SDL_DestroyWindow( window ); 
