@@ -6,3 +6,4 @@ obj/GameObject.o
 obj/Position.o
 obj/SDLSpriteCache.o
 Footsketball
+obj/SDLKeyboardControl.o

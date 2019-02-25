@@ -3,18 +3,19 @@
 
 enum CONTROLS
 {
-    LEFT = 0,
-    RIGHT = 1,
-    UP = 2,
-    DOWN = 3,
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3,
     FIRE = 4
 };
 
 class IControl 
 {
-    virtual ~IControl() {};
-    virtual void Update() = 0;
-    virtual bool ControlPressed(CONTROLS control) = 0;
+    public:
+        virtual ~IControl() {};
+        virtual void Update() = 0;
+        virtual bool ControlPressed(CONTROLS control) = 0;
 };
 
 #endif

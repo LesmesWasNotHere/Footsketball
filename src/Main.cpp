@@ -70,6 +70,9 @@ int main(int argc, char* args[]) {
     int milisFrame;
     for (int i=0; i<2000; ++i)
     {
+        //Update SDL Events
+        SDL_PumpEvents();
+
         frameTicks = SDL_GetTicks();
         milisFrame = frameTicks - lastTicks;
         lastTicks = frameTicks;
@@ -92,6 +95,7 @@ int main(int argc, char* args[]) {
         //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
         //Update the surface 
         SDL_UpdateWindowSurface( window ); 
+
     }
 
     //Destroy window 
