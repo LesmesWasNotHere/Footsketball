@@ -1,3 +1,6 @@
+#ifndef _GAMEOBJECT_H
+#define _GAMEOBJECT_H
+
 #include "IState.h"
 #include "Animation.h"
 #include "Position.h"
@@ -14,3 +17,5 @@ class GameObject
         Animation& _CurrentAnimation;
         IState& _CurrentState;
 };
+
+#endif

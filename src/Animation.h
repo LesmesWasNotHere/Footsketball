@@ -1,3 +1,6 @@
+#ifndef _ANIMATION_H
+#define _ANIMATION_H
+
 #include <string>
 #include <vector>
 #include "AnimationFrame.h"
@@ -22,3 +25,5 @@ class Animation
         unsigned _CurrentMilis;
         unsigned _MilisPerFrame;
 };
+
+#endif

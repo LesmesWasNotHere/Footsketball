@@ -1,3 +1,6 @@
+#ifndef _ANIMATIONFRAME_H
+#define _ANIMATIONFRAME_H
+
 struct AnimationFrame
 {
     const char* SpriteName;
@@ -7,3 +10,4 @@ struct AnimationFrame
     int h;
 };
 
+#endif

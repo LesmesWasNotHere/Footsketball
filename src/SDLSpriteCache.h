@@ -1,3 +1,6 @@
+#ifndef _SPRITECACHE_H
+#define _SPRITECACHE_H
+
 #include "SDL2/SDL.h"
 #include <map>
 #include <string>
@@ -14,3 +17,5 @@ class SpriteCache
     protected:
         std::map<std::string, SDL_Surface*> _Cache;
 };
+
+#endif
