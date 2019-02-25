@@ -1,0 +1,8 @@
+obj/Animation.o
+obj/Game.o
+.vscode/c_cpp_properties.json
+obj/GameCoordinates.o
+obj/GameObject.o
+obj/Position.o
+obj/SDLSpriteCache.o
+Footsketball
