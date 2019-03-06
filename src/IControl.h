@@ -7,7 +7,9 @@ enum CONTROLS
     DOWN = 1,
     LEFT = 2,
     RIGHT = 3,
-    FIRE = 4
+    FIRE = 4,
+    EXIT = 10,
+    PAUSE = 11
 };
 
 class IControl 

@@ -1,5 +1,6 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "SDLKeyboardControl.h"
 #include "SDLSpriteCache.h"
 #include "Animation.h"
 #include <iostream>
@@ -63,39 +64,73 @@ int main(int argc, char* args[]) {
     hugo4.AddFrame("CAB_HUGO", 42, 90, 14, 30);
     hugo4.AddFrame("CAB_HUGO", 56, 90, 14, 30);
 
+    SDLKeyboardControl control;
+
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
     int lastTicks =  SDL_GetTicks();
     int frameTicks;
     int milisFrame;
-    for (int i=0; i<2000; ++i)
+    double px = 0;
+    double py = 0;
+    Animation* currentAnimation = &hugo1;
+
+    while (true)
     {
         //Update SDL Events
         SDL_PumpEvents();
 
+        control.Update();  
+        
         frameTicks = SDL_GetTicks();
         milisFrame = frameTicks - lastTicks;
         lastTicks = frameTicks;
 
-        //Update animation
-        hugo3.Update(milisFrame);
+        if (control.ControlPressed(CONTROLS::EXIT))
+            break;
 
-        AnimationFrame frame = hugo3.GetCurrentFrame();
+        if (control.ControlPressed(CONTROLS::LEFT)) {
+            px -= 0.05 * milisFrame;
+            currentAnimation = &hugo4;
+        }
+
+        if (control.ControlPressed(CONTROLS::RIGHT)) {
+            px += 0.05 * milisFrame;
+            currentAnimation = &hugo3;
+        }
+
+        if (control.ControlPressed(CONTROLS::UP)) {
+            py -= 0.05 * milisFrame;
+            currentAnimation = &hugo2;
+        }
+
+        if (control.ControlPressed(CONTROLS::DOWN)) {
+            py += 0.05 * milisFrame;
+            currentAnimation = &hugo1;
+        }
+
+        //Update animation
+        currentAnimation->Update(milisFrame);
+
+        AnimationFrame frame = currentAnimation->GetCurrentFrame();
 
         //Paint field!
         SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
 
-        SDL_Rect rect;
-        rect.x = frame.x;
-        rect.y = frame.y;
-        rect.w = frame.w;
-        rect.h = frame.h;
+        SDL_Rect srcrect;
+        srcrect.x = frame.x;
+        srcrect.y = frame.y;
+        srcrect.w = frame.w;
+        srcrect.h = frame.h;
 
-        SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &rect, screenSurface, NULL);
+        SDL_Rect destrect;
+        destrect.x = px;
+        destrect.y = py;
+
+        SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &srcrect, screenSurface, &destrect);
         //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
         //Update the surface 
         SDL_UpdateWindowSurface( window ); 
-
     }
 
     //Destroy window 

@@ -21,6 +21,10 @@ bool SDLKeyboardControl::ControlPressed(CONTROLS control)
             return _KeyboardState[SDL_SCANCODE_RIGHT];
         case FIRE:
             return _KeyboardState[SDL_SCANCODE_SPACE];
+        case EXIT:
+            return _KeyboardState[SDL_SCANCODE_ESCAPE];
+        case PAUSE:
+            return _KeyboardState[SDL_SCANCODE_H];
     }
     return false;
 }
