@@ -4,6 +4,7 @@
 #include "SDLSpriteCache.h"
 #include "Animation.h"
 #include <iostream>
+#include <functional>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -73,7 +74,7 @@ int main(int argc, char* args[]) {
     int milisFrame;
     double px = 0;
     double py = 0;
-    Animation* currentAnimation = &hugo1;
+    auto currentAnimation = std::ref(hugo1);
 
     while (true)
     {
@@ -91,28 +92,28 @@ int main(int argc, char* args[]) {
 
         if (control.ControlPressed(CONTROLS::LEFT)) {
             px -= 0.05 * milisFrame;
-            currentAnimation = &hugo4;
+            currentAnimation = std::ref(hugo4);
         }
 
         if (control.ControlPressed(CONTROLS::RIGHT)) {
             px += 0.05 * milisFrame;
-            currentAnimation = &hugo3;
+            currentAnimation = std::ref(hugo3);
         }
 
         if (control.ControlPressed(CONTROLS::UP)) {
             py -= 0.05 * milisFrame;
-            currentAnimation = &hugo2;
+            currentAnimation = std::ref(hugo2);
         }
 
         if (control.ControlPressed(CONTROLS::DOWN)) {
             py += 0.05 * milisFrame;
-            currentAnimation = &hugo1;
+            currentAnimation = std::ref(hugo1);
         }
 
         //Update animation
-        currentAnimation->Update(milisFrame);
+        currentAnimation.get().Update(milisFrame);
 
-        AnimationFrame frame = currentAnimation->GetCurrentFrame();
+        AnimationFrame frame = currentAnimation.get().GetCurrentFrame();
 
         //Paint field!
         SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);

@@ -5,11 +5,11 @@
 #include <map>
 #include <string>
 
-class SpriteCache
+class SDLSpriteCache
 {
     public:
-        SpriteCache();
-        ~SpriteCache();
+        SDLSpriteCache();
+        ~SDLSpriteCache();
 
         bool Load(const char* path, const char* id);
         SDL_Surface* GetSprite(const char* id);

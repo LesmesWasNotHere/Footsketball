@@ -7,3 +7,5 @@ obj/Position.o
 obj/SDLSpriteCache.o
 Footsketball
 obj/SDLKeyboardControl.o
+doc/ClassDiagram.dia.autosave
+.vscode/ipch/

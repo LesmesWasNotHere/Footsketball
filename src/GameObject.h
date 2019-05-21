@@ -4,6 +4,7 @@
 #include "IState.h"
 #include "Animation.h"
 #include "Position.h"
+#include <functional>
 
 class GameObject
 {
@@ -13,9 +14,9 @@ class GameObject
         IState& GetCurrentState();
         void SetCurrentState(IState& state);
     private:
-        Position& _CurrentPosition;
-        Animation& _CurrentAnimation;
-        IState& _CurrentState;
+        Position _CurrentPosition;
+        std::reference_wrapper<Animation> _CurrentAnimation;
+        std::reference_wrapper<IState> _CurrentState;
 };
 
 #endif

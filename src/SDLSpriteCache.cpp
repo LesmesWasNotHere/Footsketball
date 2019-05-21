@@ -6,7 +6,7 @@ SpriteCache::SpriteCache():_Cache()
 {
 }
 
-SpriteCache::~SpriteCache()
+SDLSpriteCache::~SDLSpriteCache()
 {
     for (std::map<std::string,SDL_Surface*>::iterator i=_Cache.begin(); i!=_Cache.end(); ++i)
     {
@@ -14,7 +14,7 @@ SpriteCache::~SpriteCache()
     }
 }
 
-bool SpriteCache::Load(const char* path, const char* id)
+bool SDLSpriteCache::Load(const char* path, const char* id)
 {
     assert(!_Cache.count(id));
 
@@ -29,7 +29,7 @@ bool SpriteCache::Load(const char* path, const char* id)
     return false;
 }
 
-SDL_Surface* SpriteCache::GetSprite(const char* id)
+SDL_Surface* SDLSpriteCache::GetSprite(const char* id)
 {
     std::map<std::string,SDL_Surface*>::iterator i = _Cache.find(id);
 
