@@ -2,7 +2,7 @@
 #include "SDL2/SDL_image.h"
 #include <cassert>
 
-SpriteCache::SpriteCache():_Cache()
+SDLSpriteCache::SDLSpriteCache():_Cache()
 {
 }
 
