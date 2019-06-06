@@ -2,11 +2,14 @@
 CC=g++
 CFLAGS=-I .
 
-Footsketball: src/Main.cpp obj/Animation.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o
+Footsketball: src/Main.cpp obj/Animation.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o obj/Scene.o
 	$(CC) -o $@ $^ -lSDL2 -lSDL2_image
 	
 obj/Animation.o: src/Animation.cpp src/Animation.h
 	$(CC) -c -o $@ src/Animation.cpp
+
+obj/Scene.o: src/Scene.cpp src/Scene.h
+	$(CC) -c -o $@ src/Scene.cpp
 
 obj/Game.o: src/Game.h src/Game.cpp
 	$(CC) -c -o $@ src/Game.cpp 
