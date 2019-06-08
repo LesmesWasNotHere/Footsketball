@@ -35,7 +35,7 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
-    SpriteCache spriteCache;
+    SDLSpriteCache spriteCache;
 
     spriteCache.Load("graphics/field.png", "FIELD");
     spriteCache.Load("graphics/ball.png", "BALL");

@@ -30,4 +30,5 @@ bool Game::Loop(unsigned milis)
         else
             return false;
     }
+    return true;
 }

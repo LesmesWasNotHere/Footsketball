@@ -10,3 +10,5 @@ obj/SDLKeyboardControl.o
 doc/ClassDiagram.dia.autosave
 .vscode/ipch/
 doc/ClassDiagram.dia~
+obj/Scene.o
+obj/StateControlled.o

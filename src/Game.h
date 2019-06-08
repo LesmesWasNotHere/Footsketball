@@ -11,7 +11,7 @@ class Game
         Scene& GetCurrentScene();
         bool Loop(unsigned milis);
     protected:
-        std::vector<Scene&> _Scenes;
+        std::vector<std::reference_wrapper<Scene>> _Scenes;
         std::reference_wrapper<Scene> _CurrentScene;
 };
 

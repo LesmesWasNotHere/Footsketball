@@ -15,11 +15,11 @@ void Scene::AddGameObject(GameObject& gameObject)
 
 void Scene::RemoveGameObject(GameObject& gameObject)
 {
-    for(std::vector<GameObject&>::iterator i = _GameObjects.begin();i != _GameObjects.end();++i)
+    for(std::vector<std::reference_wrapper<GameObject>>::iterator i = _GameObjects.begin();i != _GameObjects.end();++i)
     {
-        if (&(*i) == &gameObject)
+        if (&(i->get()) == &gameObject)
         {
-            i->erase();
+            _GameObjects.erase(i);
             break;
         }
     }
@@ -27,8 +27,12 @@ void Scene::RemoveGameObject(GameObject& gameObject)
 
 bool Scene::OnLoop(unsigned milis)
 {
-    for(std::vector<GameObject&>::iterator i = _GameObjects.begin();i != _GameObjects.end();++i)
-        i->GetCurrentState().Update(milis);
+    for(std::vector<std::reference_wrapper<GameObject>>::iterator i = _GameObjects.begin();i != _GameObjects.end();++i)
+    {
+        if (!i->get().GetCurrentState().Update(milis))
+            i = _GameObjects.erase(i);
+    }
+    return true;
 }
 
 void Scene::OnStart()

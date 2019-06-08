@@ -15,7 +15,7 @@ class Scene
         virtual void OnStart();
         virtual void OnEnd();
     protected:
-        std::vector<GameObject&> _GameObjects;
+        std::vector<std::reference_wrapper<GameObject>> _GameObjects;
 };
 
 #endif
