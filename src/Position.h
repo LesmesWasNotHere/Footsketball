@@ -19,6 +19,12 @@ class Position
         double SquareDistance(Position position) const;
         double Distance(Position position) const;
 
+	void Normalize2D();
+	void Normalize();
+
+	void Direction2D(Position other, Position& result) const;
+	void Direction(Position other, Position& result) const;
+
     private:
         double _X;
         double _Y;
