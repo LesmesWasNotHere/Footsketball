@@ -65,3 +65,35 @@ double Position::Distance(Position position) const
 {
     return sqrt(SquareDistance(position));
 }
+
+void Position::Normalize2D()
+{
+  Position origin(0,0,0);
+  double module = Distance2D(origin);
+  SetX(GetX() / module);
+  SetY(GetY() / module);
+}
+
+void Position::Normalize()
+{
+  Position origin(0,0,0);
+  double module = Distance(origin);
+  SetX(GetX() / module);
+  SetY(GetY() / module);
+  SetZ(GetZ() / module);
+}
+
+void Position::Direction2D(Position other, Position& result) const
+{
+  result.SetX(other.GetX() - GetX());
+  result.SetY(other.GetY() - GetY());
+  result.Normalize2D();
+}
+
+void Position::Direction(Position other, Position& result) const
+{
+  result.SetX(other.GetX() - GetX());
+  result.SetY(other.GetY() - GetY());
+  result.SetZ(other.GetZ() - GetZ());
+  result.Normalize();
+}
