@@ -4,7 +4,7 @@
 class IState {
     public:
         virtual ~IState() {};
-        virtual bool Update(unsigned milis)=0;
+        virtual bool Update(unsigned milis) =0;
         virtual void OnEnter() {};
         virtual void OnExit() {};
 };

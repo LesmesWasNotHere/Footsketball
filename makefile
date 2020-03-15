@@ -2,11 +2,14 @@
 CC=g++
 CFLAGS=-I .
 
-Footsketball: src/Main.cpp obj/Animation.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o obj/Scene.o obj/StateControlled.o
+Footsketball: src/Main.cpp obj/Animation.o obj/AnimationVoid.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o obj/Scene.o obj/StateControlled.o obj/FootsketPlayer.o obj/StateVoid.o
 	$(CC) -o $@ $^ -lSDL2 -lSDL2_image
 	
 obj/Animation.o: src/Animation.cpp src/Animation.h
 	$(CC) -c -o $@ src/Animation.cpp
+
+obj/AnimationVoid.o: src/AnimationVoid.cpp src/AnimationVoid.h
+	$(CC) -c -o $@ src/AnimationVoid.cpp
 
 obj/Scene.o: src/Scene.cpp src/Scene.h
 	$(CC) -c -o $@ src/Scene.cpp
@@ -31,6 +34,13 @@ obj/SDLSpriteCache.o: src/SDLSpriteCache.cpp src/SDLSpriteCache.h
 
 obj/StateControlled.o: src/StateControlled.cpp src/StateControlled.h
 	$(CC) -c -o $@ src/StateControlled.cpp
+
+obj/FootsketPlayer.o: src/FootsketPlayer.cpp src/FootsketPlayer.h
+	$(CC) -c -o $@ src/FootsketPlayer.cpp
+
+obj/StateVoid.o: src/StateVoid.cpp src/StateVoid.h
+	$(CC) -c -o $@ src/StateVoid.cpp
+
 
 clean:
 	rm -Rf obj/* Footsketball

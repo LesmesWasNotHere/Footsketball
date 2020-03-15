@@ -1,4 +1,10 @@
 #include "GameObject.h"
+#include "StateVoid.h"
+#include "AnimationVoid.h"
+
+GameObject::GameObject():_CurrentState(StateVoid::Instance),_CurrentAnimation(AnimationVoid::Instance)
+{
+}
 
 Position& GameObject::GetCurrentPosition()
 {
