@@ -12,3 +12,6 @@ doc/ClassDiagram.dia.autosave
 doc/ClassDiagram.dia~
 obj/Scene.o
 obj/StateControlled.o
+obj/AnimationVoid.o
+obj/FootsketPlayer.o
+obj/StateVoid.o
