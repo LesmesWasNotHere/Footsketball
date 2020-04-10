@@ -2,7 +2,7 @@
 #include "StateVoid.h"
 #include "AnimationVoid.h"
 
-GameObject::GameObject():_CurrentState(StateVoid::Instance),_CurrentAnimation(AnimationVoid::Instance)
+GameObject::GameObject():_CurrentState(StateVoid::Instance()),_CurrentAnimation(AnimationVoid::Instance())
 {
 }
 

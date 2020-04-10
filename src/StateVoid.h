@@ -6,7 +6,7 @@
 class StateVoid:public IState
 {
     public:
-        static StateVoid Instance;
+        static StateVoid& Instance();
 
         virtual bool Update(unsigned milis);
     protected:

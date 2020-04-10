@@ -6,7 +6,7 @@
 class AnimationVoid:public Animation
 {
     public:
-        static AnimationVoid Instance;
+        static AnimationVoid& Instance();
 
     protected:
         AnimationVoid();
