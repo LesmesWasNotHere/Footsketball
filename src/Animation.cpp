@@ -1,7 +1,7 @@
 #include "Animation.h"
 #include <cassert>
 
-Animation::Animation(std::string name, unsigned fps):_Name(name), _Frames() 
+Animation::Animation(std::string name, unsigned fps):_Name(name), _Frames(), _CurrentFrame(0) 
 {
     assert(name.length() > 0);
     SetFPS(fps);
@@ -16,29 +16,32 @@ std::string Animation::GetName()
     return _Name;
 } 
 
-AnimationFrame Animation::GetCurrentFrame()
+AnimationFrame& Animation::GetCurrentFrame()
 {
+    assert(_Frames.size());
     return _Frames[_CurrentFrame];
 }
 
 void Animation::SetFPS(unsigned fps)
 {
-    assert(fps > 0);
-    assert(fps <= 1000);
+    assert(fps <= 100);
 
-    _MilisPerFrame = (1000 / fps);
+    _MilisPerFrame = fps ? (1000 / fps) : 0;
 }
 
 void Animation::Update(unsigned milis)
 {
-    //Add milis to current milis
-    _CurrentMilis += milis;
-    //sum frames passed
-    _CurrentFrame += (_CurrentMilis / _MilisPerFrame);
-    //adjust frames to the animation size
-    _CurrentFrame %= _Frames.size();
-    //Adjust _CurrentMiles to the remaining of the next frame
-    _CurrentMilis %= _MilisPerFrame;
+    if (_MilisPerFrame)
+    {
+        //Add milis to current milis
+        _CurrentMilis += milis;
+        //sum frames passed
+        _CurrentFrame += (_CurrentMilis / _MilisPerFrame);
+        //adjust frames to the animation size
+        _CurrentFrame %= _Frames.size();
+        //Adjust _CurrentMiles to the remaining of the next frame
+        _CurrentMilis %= _MilisPerFrame;
+    }
 }
 
 void Animation::Reset()

@@ -3,13 +3,13 @@
 
 enum CONTROLS
 {
-    UP = 0,
-    DOWN = 1,
-    LEFT = 2,
-    RIGHT = 3,
-    FIRE = 4,
-    EXIT = 10,
-    PAUSE = 11
+    UP = 1,
+    DOWN = 2,
+    LEFT = 4,
+    RIGHT = 8,
+    FIRE = 16,
+    EXIT = 32,
+    PAUSE = 64
 };
 
 class IControl 
@@ -17,7 +17,7 @@ class IControl
     public:
         virtual ~IControl() {};
         virtual void Update() = 0;
-        virtual bool ControlPressed(CONTROLS control) = 0;
+        virtual int GetState() = 0;
 };
 
 #endif

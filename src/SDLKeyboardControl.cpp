@@ -4,27 +4,32 @@
 
 void SDLKeyboardControl::Update()
 {
-    _KeyboardState = SDL_GetKeyboardState(NULL);
+    _State = 0;
+    const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
+   
+    if (keyboardState[SDL_SCANCODE_UP])
+        _State |= UP;
+
+    if (keyboardState[SDL_SCANCODE_DOWN])
+        _State |= DOWN;
+
+    if (keyboardState[SDL_SCANCODE_LEFT])
+        _State |= LEFT;
+
+    if (keyboardState[SDL_SCANCODE_RIGHT])
+        _State |= RIGHT;
+
+    if (keyboardState[SDL_SCANCODE_SPACE])
+        _State |= FIRE;
+
+    if (keyboardState[SDL_SCANCODE_ESCAPE])
+        _State |= EXIT;
+
+    if (keyboardState[SDL_SCANCODE_H])
+        _State |= PAUSE;
 }
 
-bool SDLKeyboardControl::ControlPressed(CONTROLS control)
+int SDLKeyboardControl::GetState()
 {
-    switch(control)
-    {
-        case UP:
-            return _KeyboardState[SDL_SCANCODE_UP];
-        case DOWN:
-            return _KeyboardState[SDL_SCANCODE_DOWN];
-        case LEFT:
-            return _KeyboardState[SDL_SCANCODE_LEFT];
-        case RIGHT:
-            return _KeyboardState[SDL_SCANCODE_RIGHT];
-        case FIRE:
-            return _KeyboardState[SDL_SCANCODE_SPACE];
-        case EXIT:
-            return _KeyboardState[SDL_SCANCODE_ESCAPE];
-        case PAUSE:
-            return _KeyboardState[SDL_SCANCODE_H];
-    }
-    return false;
+    return _State;
 }

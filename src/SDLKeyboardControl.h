@@ -8,10 +8,9 @@ class SDLKeyboardControl: public IControl
 {
     public:
         virtual void Update();
-        virtual bool ControlPressed(CONTROLS control);
-    
+        virtual int GetState();
     private:
-        const Uint8* _KeyboardState;
+        int _State;
 };
 
 #endif

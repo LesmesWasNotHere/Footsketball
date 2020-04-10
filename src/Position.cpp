@@ -6,47 +6,17 @@ Position::Position()
 {
 }
 
-Position::Position(double x, double y, double z)
+Position::Position(double X, double Y, double Z)
 {
-    _X = x;
-    _Y = y;
-    _Z = z;
-}
-
-double Position::GetX() const
-{
-    return _X;
-}
-
-void Position::SetX(double x)
-{
-    _X = x;
-}
-
-double Position::GetY() const
-{
-    return _Y;
-}
-
-void Position::SetY(double y)
-{
-    _Y = y;
-}
-        
-double Position::GetZ() const
-{
-    return _Z;
-}
-
-void Position::SetZ(double z)
-{
-    _Z = z;
+    x = X;
+    y = Y;
+    z = Z;
 }
 
 double Position::SquareDistance2D(Position position) const
 {
-    double distX = (_X - position._X);
-    double distY = (_Y - position._Y); 
+    double distX = (x - position.x);
+    double distY = (y - position.y); 
     return  distX * distX + distY * distY; 
 }
 
@@ -57,7 +27,7 @@ double Position::Distance2D(Position position) const
 
 double Position::SquareDistance(Position position) const
 {
-    double distZ = (_Z - position._Z);
+    double distZ = (z - position.z);
     return SquareDistance2D(position) + distZ * distZ;
 }
 
@@ -70,30 +40,30 @@ void Position::Normalize2D()
 {
   Position origin(0,0,0);
   double module = Distance2D(origin);
-  SetX(GetX() / module);
-  SetY(GetY() / module);
+  x /= module;
+  y /= module;
 }
 
 void Position::Normalize()
 {
   Position origin(0,0,0);
   double module = Distance(origin);
-  SetX(GetX() / module);
-  SetY(GetY() / module);
-  SetZ(GetZ() / module);
+  x /= module;
+  y /= module;
+  z /= module;
 }
 
 void Position::Direction2D(Position other, Position& result) const
 {
-  result.SetX(other.GetX() - GetX());
-  result.SetY(other.GetY() - GetY());
+  result.x = (other.x - x);
+  result.y = (other.y - y);
   result.Normalize2D();
 }
 
 void Position::Direction(Position other, Position& result) const
 {
-  result.SetX(other.GetX() - GetX());
-  result.SetY(other.GetY() - GetY());
-  result.SetZ(other.GetZ() - GetZ());
+  result.x = (other.x - x);
+  result.y = (other.y - y);
+  result.z = (other.z - z);
   result.Normalize();
 }

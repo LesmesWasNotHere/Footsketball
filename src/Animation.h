@@ -12,7 +12,7 @@ class Animation
         ~Animation();
 
         std::string GetName();
-        AnimationFrame GetCurrentFrame();
+        AnimationFrame& GetCurrentFrame();
         void SetFPS(unsigned fps);
         
         void Update(unsigned milis);

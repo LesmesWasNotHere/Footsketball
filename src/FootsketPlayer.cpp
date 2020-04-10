@@ -1,9 +1,13 @@
 #include "FootsketPlayer.h"
 
-FootsketPlayer::FootsketPlayer(const char* spriteName):_RunUpAnimation("RUN_DOWN", _Fps), 
-                                                        _RunDownAnimation("RUN_UP", _Fps), 
+FootsketPlayer::FootsketPlayer(const char* spriteName):_RunUpAnimation("RUN_UP", _Fps), 
+                                                        _RunDownAnimation("RUN_DOWN", _Fps), 
                                                         _RunLeftAnimation("RUN_LEFT", _Fps),
-                                                        _RunRightAnimation("RUN_RIGHT", _Fps)
+                                                        _RunRightAnimation("RUN_RIGHT", _Fps),
+                                                        _StopedUpAnimation("STOPED_UP", _Fps), 
+                                                        _StopedDownAnimation("STOPED_DOWN", _Fps), 
+                                                        _StopedLeftAnimation("STOPED_LEFT", _Fps),
+                                                        _StopedRightAnimation("STOPED_RIGHT", _Fps)
 {
     _RunUpAnimation.AddFrame(spriteName, 14, 30, 14, 30);
     _RunUpAnimation.AddFrame(spriteName, 28, 30, 14, 30);
@@ -24,6 +28,16 @@ FootsketPlayer::FootsketPlayer(const char* spriteName):_RunUpAnimation("RUN_DOWN
     _RunRightAnimation.AddFrame(spriteName, 28, 60, 14, 30);
     _RunRightAnimation.AddFrame(spriteName, 42, 60, 14, 30);
     _RunRightAnimation.AddFrame(spriteName, 56, 60, 14, 30);
+
+    _StopedUpAnimation.AddFrame(spriteName, 0, 30, 14, 30);
+
+    _StopedDownAnimation.AddFrame(spriteName, 0, 0, 14, 30);
+
+    _StopedLeftAnimation.AddFrame(spriteName, 0, 90, 14, 30);
+
+    _StopedRightAnimation.AddFrame(spriteName, 0, 60, 14, 30);
+
+    ActivateStopedRightAnimation();
 }
 
 void FootsketPlayer::ActivateRunUpAnimation()
@@ -48,20 +62,20 @@ void FootsketPlayer::ActivateRunRightAnimation()
         
 void FootsketPlayer::ActivateStopedUpAnimation()
 {
-
+    _CurrentAnimation = std::ref(_StopedUpAnimation);
 }
 
 void FootsketPlayer::ActivateStopedDownAnimation()
 {
-
+    _CurrentAnimation = std::ref(_StopedDownAnimation);
 }
     
 void FootsketPlayer::ActivateStopedLeftAnimation()
 {
-
+    _CurrentAnimation = std::ref(_StopedLeftAnimation);
 }
 
 void FootsketPlayer::ActivateStopedRightAnimation()
 {
-
+    _CurrentAnimation = std::ref(_StopedRightAnimation);
 }

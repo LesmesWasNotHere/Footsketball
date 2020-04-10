@@ -7,26 +7,27 @@ StateControlled::StateControlled(GameObject& gameObject, IControl& control):_Gam
 bool StateControlled::Update(unsigned milis)
 {
     const double speed = 0.05;
+    int controlState = _Control.GetState();
 
     Position& p = _GameObject.GetCurrentPosition();
 
-    if (_Control.ControlPressed(CONTROLS::LEFT)) {
-        p.SetX(p.GetX() - speed * milis);
+    if (CONTROLS::LEFT & controlState) {
+        p.x -= speed * milis;
         //currentAnimation = std::ref(hugo4);
     }
 
-    if (_Control.ControlPressed(CONTROLS::RIGHT)) {
-        p.SetX(p.GetX() + speed * milis);
+    if (CONTROLS::RIGHT & controlState) {
+        p.x += speed * milis;
         //currentAnimation = std::ref(hugo3);
     }
 
-    if (_Control.ControlPressed(CONTROLS::UP)) {
-        p.SetY(p.GetY() - speed * milis);
+    if (CONTROLS::UP & controlState) {
+        p.y -= speed * milis;
         //currentAnimation = std::ref(hugo2);
     }
 
-    if (_Control.ControlPressed(CONTROLS::DOWN)) {
-        p.SetY(p.GetY() + speed * milis);
+    if (CONTROLS::DOWN & controlState) {
+        p.y += speed * milis;
         //currentAnimation = std::ref(hugo1);
     }
 

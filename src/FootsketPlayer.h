@@ -22,6 +22,10 @@ class FootsketPlayer:public GameObject
         Animation _RunDownAnimation;
         Animation _RunLeftAnimation;
         Animation _RunRightAnimation;
+        Animation _StopedUpAnimation;
+        Animation _StopedDownAnimation;
+        Animation _StopedLeftAnimation;
+        Animation _StopedRightAnimation;
 };
 
 #endif
