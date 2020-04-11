@@ -52,9 +52,8 @@ int main(int argc, char* args[]) {
     double px = 0;
     double py = 0;
 
-    FootsketPlayer hugo("CAB_HUGO");
-    int lastControlState;
-    int controlState;
+    FootsketPlayer hugo("CAB_HUGO", control);
+    unsigned controlState;
 
     while (true)
     {
@@ -68,49 +67,11 @@ int main(int argc, char* args[]) {
         milisFrame = frameTicks - lastTicks;
         lastTicks = frameTicks;
 
-        //Chech if some key is pressed
-        if (controlState)
-        {
-            if (CONTROLS::EXIT & controlState)
-                break;
+        if (CONTROLS::EXIT & controlState)
+            break;
 
-            if (CONTROLS::LEFT & controlState) {
-                px -= 0.05 * milisFrame;
-                hugo.ActivateRunLeftAnimation();
-            }
-
-            if (CONTROLS::RIGHT & controlState) {
-                px += 0.05 * milisFrame;
-                hugo.ActivateRunRightAnimation();
-            }
-
-            if (CONTROLS::UP & controlState) {
-                py -= 0.05 * milisFrame;
-                hugo.ActivateRunUpAnimation();
-            }
-
-            if (CONTROLS::DOWN & controlState) {
-                py += 0.05 * milisFrame;
-                hugo.ActivateRunDownAnimation();
-            }
-        }
-        else
-        {
-            if (CONTROLS::UP & lastControlState)
-                hugo.ActivateStopedUpAnimation();
-            else
-                if (CONTROLS::DOWN & lastControlState)
-                    hugo.ActivateStopedDownAnimation();
-                else
-                    if (CONTROLS::LEFT & lastControlState)
-                        hugo.ActivateStopedLeftAnimation();
-                    else
-                        if (CONTROLS::RIGHT & lastControlState) 
-                            hugo.ActivateStopedRightAnimation();            
-        }
-
-        //Update animation
-        hugo.GetCurrentAnimation().Update(milisFrame);
+        //Update object
+        hugo.Update(milisFrame);
 
         AnimationFrame& frame = hugo.GetCurrentAnimation().GetCurrentFrame();
 
@@ -123,16 +84,15 @@ int main(int argc, char* args[]) {
         srcrect.w = frame.w;
         srcrect.h = frame.h;
 
+        Position& p = hugo.GetCurrentPosition();
         SDL_Rect destrect;
-        destrect.x = px;
-        destrect.y = py;
+        destrect.x = p.x;
+        destrect.y = p.y;
 
         SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &srcrect, screenSurface, &destrect);
         //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
         //Update the surface 
         SDL_UpdateWindowSurface( window ); 
-
-        lastControlState = controlState;
     }
 
     //Destroy window 

@@ -29,7 +29,7 @@ void SDLKeyboardControl::Update()
         _State |= PAUSE;
 }
 
-int SDLKeyboardControl::GetState()
+unsigned SDLKeyboardControl::GetState()
 {
     return _State;
 }

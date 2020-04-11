@@ -25,3 +25,10 @@ void GameObject::SetCurrentState(IState& state)
 {
     _CurrentState = state;
 }
+
+bool GameObject::Update(unsigned milis)
+{
+    bool result = _CurrentState.get().Update(milis);
+    _CurrentAnimation.get().Update(milis);
+    return result;
+}

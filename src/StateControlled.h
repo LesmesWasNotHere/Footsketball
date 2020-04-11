@@ -3,17 +3,19 @@
 
 #include "IState.h"
 #include "IControl.h"
-#include "GameObject.h"
+
+class FootsketPlayer;
 
 class StateControlled: public IState
 {
     public:
-        StateControlled(GameObject& gameObject, IControl& control);
+        StateControlled(FootsketPlayer& gameObject, IControl& control);
 
         virtual bool Update(unsigned milis);
     protected:
         IControl& _Control;
-        GameObject& _GameObject;
+        FootsketPlayer& _GameObject;
+        unsigned _LastControlState;
 };
 
 #endif

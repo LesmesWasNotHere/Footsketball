@@ -8,9 +8,9 @@ class SDLKeyboardControl: public IControl
 {
     public:
         virtual void Update();
-        virtual int GetState();
+        virtual unsigned GetState();
     private:
-        int _State;
+        unsigned _State;
 };
 
 #endif

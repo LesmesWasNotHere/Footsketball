@@ -1,35 +1,63 @@
 #include "StateControlled.h"
+#include "FootsketPlayer.h"
 
-StateControlled::StateControlled(GameObject& gameObject, IControl& control):_GameObject(gameObject),_Control(control)
+StateControlled::StateControlled(FootsketPlayer& gameObject, IControl& control):_GameObject(gameObject),_Control(control),_LastControlState(0)
 {
 }
 
 bool StateControlled::Update(unsigned milis)
 {
     const double speed = 0.05;
-    int controlState = _Control.GetState();
+    unsigned controlState = _Control.GetState();
 
     Position& p = _GameObject.GetCurrentPosition();
 
-    if (CONTROLS::LEFT & controlState) {
-        p.x -= speed * milis;
-        //currentAnimation = std::ref(hugo4);
+    //Chech if some key is pressed
+    if (controlState)
+    {
+        Position direction(0,0,0);
+        double coeficient = speed * milis;
+
+        if (CONTROLS::LEFT & controlState) {
+            direction.x = -1.;
+            _GameObject.ActivateRunLeftAnimation();
+        }
+
+        if (CONTROLS::RIGHT & controlState) {
+            direction.x = 1.;
+            _GameObject.ActivateRunRightAnimation();
+        }
+
+        if (CONTROLS::UP & controlState) {
+            direction.y = -1.;
+            _GameObject.ActivateRunUpAnimation();
+        }
+
+        if (CONTROLS::DOWN & controlState) {
+            direction.y = 1.;
+            _GameObject.ActivateRunDownAnimation();
+        }
+
+        direction.Normalize();
+        
+        p.x += direction.x * coeficient;
+        p.y += direction.y * coeficient;
+    }
+    else
+    {
+        if (CONTROLS::UP & _LastControlState)
+            _GameObject.ActivateStopedUpAnimation();
+        else
+            if (CONTROLS::DOWN & _LastControlState)
+                _GameObject.ActivateStopedDownAnimation();
+            else
+                if (CONTROLS::LEFT & _LastControlState)
+                    _GameObject.ActivateStopedLeftAnimation();
+                else
+                    if (CONTROLS::RIGHT & _LastControlState) 
+                        _GameObject.ActivateStopedRightAnimation();            
     }
 
-    if (CONTROLS::RIGHT & controlState) {
-        p.x += speed * milis;
-        //currentAnimation = std::ref(hugo3);
-    }
-
-    if (CONTROLS::UP & controlState) {
-        p.y -= speed * milis;
-        //currentAnimation = std::ref(hugo2);
-    }
-
-    if (CONTROLS::DOWN & controlState) {
-        p.y += speed * milis;
-        //currentAnimation = std::ref(hugo1);
-    }
-
+    _LastControlState = controlState;
     return true;
 }

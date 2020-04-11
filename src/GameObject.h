@@ -14,6 +14,7 @@ class GameObject
         Animation& GetCurrentAnimation();
         IState& GetCurrentState();
         void SetCurrentState(IState& state);
+        bool Update(unsigned milis);
     protected:
         Position _CurrentPosition;
         std::reference_wrapper<Animation> _CurrentAnimation;

@@ -17,7 +17,7 @@ class IControl
     public:
         virtual ~IControl() {};
         virtual void Update() = 0;
-        virtual int GetState() = 0;
+        virtual unsigned GetState() = 0;
 };
 
 #endif

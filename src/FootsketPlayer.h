@@ -2,11 +2,13 @@
 #define _FOOTSKETPLAYER_H
 
 #include "GameObject.h"
+#include "StateControlled.h"
+#include "IControl.h"
 
 class FootsketPlayer:public GameObject
 {
     public:
-        FootsketPlayer(const char* spriteName);
+        FootsketPlayer(const char* spriteName, IControl& control);
 
         void ActivateRunUpAnimation();
         void ActivateRunDownAnimation();
@@ -18,6 +20,8 @@ class FootsketPlayer:public GameObject
         void ActivateStopedRightAnimation();
     protected:
         const unsigned _Fps = 8;
+
+        //Animations:
         Animation _RunUpAnimation;
         Animation _RunDownAnimation;
         Animation _RunLeftAnimation;
@@ -26,6 +30,8 @@ class FootsketPlayer:public GameObject
         Animation _StopedDownAnimation;
         Animation _StopedLeftAnimation;
         Animation _StopedRightAnimation;
+        //States:
+        StateControlled _StateControlled;
 };
 
 #endif

@@ -1,13 +1,14 @@
 #include "FootsketPlayer.h"
 
-FootsketPlayer::FootsketPlayer(const char* spriteName):_RunUpAnimation("RUN_UP", _Fps), 
-                                                        _RunDownAnimation("RUN_DOWN", _Fps), 
-                                                        _RunLeftAnimation("RUN_LEFT", _Fps),
-                                                        _RunRightAnimation("RUN_RIGHT", _Fps),
-                                                        _StopedUpAnimation("STOPED_UP", _Fps), 
-                                                        _StopedDownAnimation("STOPED_DOWN", _Fps), 
-                                                        _StopedLeftAnimation("STOPED_LEFT", _Fps),
-                                                        _StopedRightAnimation("STOPED_RIGHT", _Fps)
+FootsketPlayer::FootsketPlayer(const char* spriteName, IControl& control):_RunUpAnimation("RUN_UP", _Fps), 
+                                                                        _RunDownAnimation("RUN_DOWN", _Fps), 
+                                                                        _RunLeftAnimation("RUN_LEFT", _Fps),
+                                                                        _RunRightAnimation("RUN_RIGHT", _Fps),
+                                                                        _StopedUpAnimation("STOPED_UP", _Fps), 
+                                                                        _StopedDownAnimation("STOPED_DOWN", _Fps), 
+                                                                        _StopedLeftAnimation("STOPED_LEFT", _Fps),
+                                                                        _StopedRightAnimation("STOPED_RIGHT", _Fps),
+                                                                        _StateControlled(*this, control)
 {
     _RunUpAnimation.AddFrame(spriteName, 14, 30, 14, 30);
     _RunUpAnimation.AddFrame(spriteName, 28, 30, 14, 30);
@@ -38,6 +39,8 @@ FootsketPlayer::FootsketPlayer(const char* spriteName):_RunUpAnimation("RUN_UP",
     _StopedRightAnimation.AddFrame(spriteName, 0, 60, 14, 30);
 
     ActivateStopedRightAnimation();
+
+    SetCurrentState(_StateControlled);
 }
 
 void FootsketPlayer::ActivateRunUpAnimation()
