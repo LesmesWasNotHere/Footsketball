@@ -55,7 +55,7 @@ int main(int argc, char* args[]) {
 
     GameCoordinates gameCoordinates;
 
-    FootsketPlayer hugo("CAB_HUGO", control);
+    FootsketPlayer hugo("Hugo", "CAB_HUGO", control);
     hugo.GetCurrentPosition().x = 400;
     hugo.GetCurrentPosition().y = 400;
 

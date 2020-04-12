@@ -8,8 +8,10 @@
 class FootsketPlayer:public GameObject
 {
     public:
-        FootsketPlayer(const char* spriteName, IControl& control);
+        FootsketPlayer(const char* name, const char* spriteName, IControl& control);
 
+        const char* GetName();
+        
         void ActivateRunUpAnimation();
         void ActivateRunDownAnimation();
         void ActivateRunLeftAnimation();
@@ -20,6 +22,7 @@ class FootsketPlayer:public GameObject
         void ActivateStopedRightAnimation();
     protected:
         const unsigned _Fps = 8;
+        const char* _Name;
 
         //Animations:
         Animation _RunUpAnimation;

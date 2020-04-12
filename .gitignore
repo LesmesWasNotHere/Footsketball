@@ -15,3 +15,7 @@ obj/StateControlled.o
 obj/AnimationVoid.o
 obj/FootsketPlayer.o
 obj/StateVoid.o
+obj/FootsketTeam.o
+obj/FootsketMatch.o
+obj/FootsketTeamCabuenes.o
+obj/FootsketTeamInmaculada.o
