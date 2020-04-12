@@ -4,6 +4,7 @@
 #include "SDLSpriteCache.h"
 #include "Animation.h"
 #include "FootsketPlayer.h"
+#include "GameCoordinates.h"
 #include <iostream>
 #include <functional>
 
@@ -52,7 +53,12 @@ int main(int argc, char* args[]) {
     double px = 0;
     double py = 0;
 
+    GameCoordinates gameCoordinates;
+
     FootsketPlayer hugo("CAB_HUGO", control);
+    hugo.GetCurrentPosition().x = 400;
+    hugo.GetCurrentPosition().y = 400;
+
     unsigned controlState;
 
     while (true)
@@ -84,10 +90,12 @@ int main(int argc, char* args[]) {
         srcrect.w = frame.w;
         srcrect.h = frame.h;
 
-        Position& p = hugo.GetCurrentPosition();
+        double x,y,zoom;
+        gameCoordinates.World2Screen(hugo.GetCurrentPosition(), x, y, zoom);
+
         SDL_Rect destrect;
-        destrect.x = p.x;
-        destrect.y = p.y;
+        destrect.x = x - (frame.w / 2);
+        destrect.y = y - (frame.h);
 
         SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &srcrect, screenSurface, &destrect);
         //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);

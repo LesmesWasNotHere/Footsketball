@@ -59,5 +59,18 @@ bool StateControlled::Update(unsigned milis)
     }
 
     _LastControlState = controlState;
+
+    if (p.x > 800.0)
+        p.x = 800.0;
+
+    if (p.x < 0.0)
+        p.x = 0.0;
+
+    if (p.y > 500.0)
+        p.y = 500.0;
+
+    if (p.y < 300.0)
+        p.y = 300.0;
+
     return true;
 }

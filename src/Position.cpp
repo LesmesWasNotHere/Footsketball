@@ -38,6 +38,9 @@ double Position::Distance(Position position) const
 
 void Position::Normalize2D()
 {
+  if (!x && !y)
+    return;
+
   Position origin(0,0,0);
   double module = Distance2D(origin);
   x /= module;
@@ -46,6 +49,9 @@ void Position::Normalize2D()
 
 void Position::Normalize()
 {
+  if (!x && !y && !z)
+    return;
+
   Position origin(0,0,0);
   double module = Distance(origin);
   x /= module;
