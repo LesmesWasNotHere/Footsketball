@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "FootsketPlayer.h"
 #include "GameCoordinates.h"
+#include "GameSystem.h"
 #include <iostream>
 #include <functional>
 
@@ -43,8 +44,6 @@ int main(int argc, char* args[]) {
     spriteCache.Load("graphics/ball.png", "BALL");
     spriteCache.Load("graphics/Cabueñes_Hugo.png", "CAB_HUGO");
 
-    SDLKeyboardControl control;
-
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
     int lastTicks =  SDL_GetTicks();
@@ -55,7 +54,7 @@ int main(int argc, char* args[]) {
 
     GameCoordinates gameCoordinates;
 
-    FootsketPlayer hugo("Hugo", "CAB_HUGO", control);
+    FootsketPlayer hugo("Hugo", "CAB_HUGO");
     hugo.GetCurrentPosition().x = 400;
     hugo.GetCurrentPosition().y = 400;
 
@@ -66,8 +65,8 @@ int main(int argc, char* args[]) {
         //Update SDL Events
         SDL_PumpEvents();
 
-        control.Update();  
-        controlState = control.GetState();  
+        GameSystem::ControlInstance().Update();  
+        controlState = GameSystem::ControlInstance().GetState();  
         
         frameTicks = SDL_GetTicks();
         milisFrame = frameTicks - lastTicks;

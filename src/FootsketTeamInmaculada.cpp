@@ -1,6 +1,6 @@
 #include "FootsketTeamInmaculada.h"
 
-FootsketTeamInmaculada::FootsketTeamInmaculada(IControl& control):FootsketTeam("Inmaculada", control)
+FootsketTeamInmaculada::FootsketTeamInmaculada():FootsketTeam("Inmaculada")
 {
     InitPlayers();
 }

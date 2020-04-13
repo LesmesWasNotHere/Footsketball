@@ -1,13 +1,13 @@
 #include "FootsketTeamCabuenes.h"
 
-FootsketTeamCabuenes::FootsketTeamCabuenes(IControl& control):FootsketTeam("Cabueñes", control)
+FootsketTeamCabuenes::FootsketTeamCabuenes():FootsketTeam("Cabueñes")
 {
     InitPlayers();
 }
 
 void FootsketTeamCabuenes::InitPlayers()
 {
-    _Players.push_back(FootsketPlayer("Hugo", "CAB_HUGO", _Control));
-    _Players.push_back(FootsketPlayer("Pedro", "CAB_HUGO", _Control));
-    _Players.push_back(FootsketPlayer("Juan Luís", "CAB_HUGO", _Control));
+    _Players.push_back(FootsketPlayer("Hugo", "CAB_HUGO"));
+    _Players.push_back(FootsketPlayer("Pedro", "CAB_HUGO"));
+    _Players.push_back(FootsketPlayer("Juan Luís", "CAB_HUGO"));
 }

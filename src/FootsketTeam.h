@@ -7,7 +7,7 @@
 class FootsketTeam
 {
     public:
-        FootsketTeam(const char* name, IControl& control);
+        FootsketTeam(const char* name);
 
         const char* GetName();
 
@@ -15,7 +15,6 @@ class FootsketTeam
         const char* _Name;
 
     protected:
-        IControl& _Control;
         std::vector<FootsketPlayer> _Players;
 };
 

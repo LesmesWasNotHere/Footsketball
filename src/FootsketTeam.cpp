@@ -1,6 +1,6 @@
 #include "FootsketTeam.h"
 
-FootsketTeam::FootsketTeam(const char* name, IControl& control):_Name(name), _Control(control)
+FootsketTeam::FootsketTeam(const char* name):_Name(name)
 {
 }
 

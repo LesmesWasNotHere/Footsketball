@@ -9,11 +9,10 @@ class FootsketPlayer;
 class StateControlled: public IState
 {
     public:
-        StateControlled(FootsketPlayer& gameObject, IControl& control);
+        StateControlled(FootsketPlayer& gameObject);
 
         virtual bool Update(unsigned milis);
     protected:
-        IControl& _Control;
         FootsketPlayer& _GameObject;
         unsigned _LastControlState;
 };

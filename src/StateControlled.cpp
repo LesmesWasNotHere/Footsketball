@@ -1,14 +1,15 @@
 #include "StateControlled.h"
 #include "FootsketPlayer.h"
+#include "GameSystem.h"
 
-StateControlled::StateControlled(FootsketPlayer& gameObject, IControl& control):_GameObject(gameObject),_Control(control),_LastControlState(0)
+StateControlled::StateControlled(FootsketPlayer& gameObject):_GameObject(gameObject),_LastControlState(0)
 {
 }
 
 bool StateControlled::Update(unsigned milis)
 {
     const double speed = 0.05;
-    unsigned controlState = _Control.GetState();
+    unsigned controlState =  GameSystem::ControlInstance().GetState();
 
     Position& p = _GameObject.GetCurrentPosition();
 

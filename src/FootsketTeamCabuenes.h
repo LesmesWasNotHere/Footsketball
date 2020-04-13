@@ -7,7 +7,7 @@
 class FootsketTeamCabuenes: public FootsketTeam
 {
     public:
-        FootsketTeamCabuenes(IControl& control);
+        FootsketTeamCabuenes();
 
     protected:
         void InitPlayers();

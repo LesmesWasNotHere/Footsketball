@@ -1,6 +1,6 @@
 #include "FootsketPlayer.h"
 
-FootsketPlayer::FootsketPlayer(const char* name, const char* spriteName, IControl& control):
+FootsketPlayer::FootsketPlayer(const char* name, const char* spriteName):
                                                     _Name(name),
                                                     _RunUpAnimation("RUN_UP", _Fps), 
                                                     _RunDownAnimation("RUN_DOWN", _Fps), 
@@ -10,7 +10,7 @@ FootsketPlayer::FootsketPlayer(const char* name, const char* spriteName, IContro
                                                     _StopedDownAnimation("STOPED_DOWN", _Fps), 
                                                     _StopedLeftAnimation("STOPED_LEFT", _Fps),
                                                     _StopedRightAnimation("STOPED_RIGHT", _Fps),
-                                                    _StateControlled(*this, control)
+                                                    _StateControlled(*this)
 {
     _RunUpAnimation.AddFrame(spriteName, 14, 30, 14, 30);
     _RunUpAnimation.AddFrame(spriteName, 28, 30, 14, 30);

@@ -8,7 +8,7 @@
 class FootsketPlayer:public GameObject
 {
     public:
-        FootsketPlayer(const char* name, const char* spriteName, IControl& control);
+        FootsketPlayer(const char* name, const char* spriteName);
 
         const char* GetName();
         
