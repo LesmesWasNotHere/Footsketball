@@ -4,19 +4,52 @@
 #include "SDLSpriteCache.h"
 #include "Animation.h"
 #include "FootsketPlayer.h"
+#include "FootsketBall.h"
 #include "GameCoordinates.h"
 #include "GameSystem.h"
 #include <iostream>
 #include <functional>
+#include <algorithm>
+#include <vector>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
+//The surface contained by the window 
+SDL_Surface* screenSurface = NULL;
+
+GameCoordinates gameCoordinates;
+SDLSpriteCache spriteCache;
+SDL_Rect srcrect;
+SDL_Rect destrect;
+
+void drawGameObject(GameObject& gameObject)
+{
+    AnimationFrame& frame = gameObject.GetCurrentAnimation().GetCurrentFrame();
+
+    srcrect.x = frame.x;
+    srcrect.y = frame.y;
+    srcrect.w = frame.w;
+    srcrect.h = frame.h;
+
+    double x,y,zoom;
+    gameCoordinates.World2Screen(gameObject.GetCurrentPosition(), x, y, zoom);
+
+    destrect.x = x - (frame.w / 2);
+    destrect.y = y - (frame.h);
+
+    SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &srcrect, screenSurface, &destrect);
+}
+
+int drawingObjectComparer(GameObject* object1, GameObject* object2)
+{
+    return object1->GetCurrentPosition().y < object2->GetCurrentPosition().y;
+}
+
 int main(int argc, char* args[]) {
     //The window we'll be rendering to 
     SDL_Window* window = NULL; 
-    //The surface contained by the window 
-    SDL_Surface* screenSurface = NULL; 
+     
     //Initialize SDL 
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) 
     { 
@@ -38,8 +71,6 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
-    SDLSpriteCache spriteCache;
-
     spriteCache.Load("graphics/field.png", "FIELD");
     spriteCache.Load("graphics/ball.png", "BALL");
     spriteCache.Load("graphics/Cabueñes_Hugo.png", "CAB_HUGO");
@@ -52,11 +83,18 @@ int main(int argc, char* args[]) {
     double px = 0;
     double py = 0;
 
-    GameCoordinates gameCoordinates;
-
     FootsketPlayer hugo("Hugo", "CAB_HUGO");
     hugo.GetCurrentPosition().x = 400;
     hugo.GetCurrentPosition().y = 400;
+
+    FootsketBall ball("BALL");
+    ball.GetCurrentPosition().x = 500;
+    ball.GetCurrentPosition().y = 400;
+
+    std::vector<GameObject*>::iterator it;
+    std::vector<GameObject*> objects;
+    objects.push_back(&hugo);
+    objects.push_back(&ball);
 
     unsigned controlState;
 
@@ -75,30 +113,19 @@ int main(int argc, char* args[]) {
         if (CONTROLS::EXIT & controlState)
             break;
 
-        //Update object
-        hugo.Update(milisFrame);
+        //Update objects
 
-        AnimationFrame& frame = hugo.GetCurrentAnimation().GetCurrentFrame();
+        for (it = objects.begin(); it != objects.end(); ++it)
+            (*it)->Update(milisFrame);
 
         //Paint field!
         SDL_BlitSurface(spriteCache.GetSprite("FIELD"), NULL, screenSurface, NULL);
 
-        SDL_Rect srcrect;
-        srcrect.x = frame.x;
-        srcrect.y = frame.y;
-        srcrect.w = frame.w;
-        srcrect.h = frame.h;
+        std::sort(objects.begin(), objects.end(), drawingObjectComparer);
 
-        double x,y,zoom;
-        gameCoordinates.World2Screen(hugo.GetCurrentPosition(), x, y, zoom);
+        for (it = objects.begin(); it != objects.end(); ++it)
+            drawGameObject(**it);
 
-        SDL_Rect destrect;
-        destrect.x = x - (frame.w / 2);
-        destrect.y = y - (frame.h);
-
-        SDL_BlitSurface(spriteCache.GetSprite(frame.SpriteName), &srcrect, screenSurface, &destrect);
-        //SDL_BlitSurface(spriteCache.GetSprite("BALL"), NULL, screenSurface, NULL);
-        //Update the surface 
         SDL_UpdateWindowSurface( window ); 
     }
 
