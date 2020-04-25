@@ -2,8 +2,8 @@
 CC=g++
 CFLAGS=-I .
 
-Footsketball: src/Main.cpp obj/Animation.o obj/AnimationVoid.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o obj/GameSystem.o obj/Scene.o obj/StateControlled.o obj/FootsketMatch.o obj/FootsketTeam.o obj/FootsketTeamCabuenes.o obj/FootsketTeamInmaculada.o obj/FootsketPlayer.o obj/FootsketBall.o obj/StateVoid.o
-	$(CC) -o $@ $^ -lSDL2 -lSDL2_image
+Footsketball: src/Main.cpp obj/Animation.o obj/AnimationVoid.o obj/Game.o obj/GameCoordinates.o obj/GameObject.o obj/Position.o obj/SDLKeyboardControl.o obj/SDLSpriteCache.o obj/SDLMatchOverlay.o obj/GameSystem.o obj/Scene.o obj/FPStateControlled.o obj/FootsketMatch.o obj/FootsketTeam.o obj/FootsketTeamCabuenes.o obj/FootsketTeamInmaculada.o obj/FootsketPlayer.o obj/FootsketBall.o obj/StateVoid.o obj/FPSCounter.o
+	$(CC) -o $@ $^ -lSDL2 -lSDL2_image -lSDL2_ttf
 	
 obj/Animation.o: src/Animation.cpp src/Animation.h
 	$(CC) -c -o $@ src/Animation.cpp
@@ -32,11 +32,14 @@ obj/SDLKeyboardControl.o: src/SDLKeyboardControl.cpp src/SDLKeyboardControl.h sr
 obj/SDLSpriteCache.o: src/SDLSpriteCache.cpp src/SDLSpriteCache.h
 	$(CC) -c -o $@ src/SDLSpriteCache.cpp
 
+obj/SDLMatchOverlay.o: src/SDLMatchOverlay.cpp src/SDLMatchOverlay.h
+	$(CC) -c -o $@ src/SDLMatchOverlay.cpp
+
 obj/GameSystem.o: src/GameSystem.cpp src/GameSystem.h
 	$(CC) -c -o $@ src/GameSystem.cpp
 
-obj/StateControlled.o: src/StateControlled.cpp src/StateControlled.h
-	$(CC) -c -o $@ src/StateControlled.cpp
+obj/FPStateControlled.o: src/FPStateControlled.cpp src/FPStateControlled.h
+	$(CC) -c -o $@ src/FPStateControlled.cpp
 
 obj/FootsketMatch.o: src/FootsketMatch.cpp src/FootsketMatch.h
 	$(CC) -c -o $@ src/FootsketMatch.cpp
@@ -59,6 +62,8 @@ obj/FootsketBall.o: src/FootsketBall.cpp src/FootsketBall.h
 obj/StateVoid.o: src/StateVoid.cpp src/StateVoid.h
 	$(CC) -c -o $@ src/StateVoid.cpp
 
+obj/FPSCounter.o: src/FPSCounter.cpp src/FPSCounter.h
+	$(CC) -c -o $@ src/FPSCounter.cpp
 
 clean:
 	rm -Rf obj/* Footsketball

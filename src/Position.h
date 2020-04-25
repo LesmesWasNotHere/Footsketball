@@ -4,8 +4,9 @@
 class Position 
 {
     public:
-        Position();
+        Position();       
         Position(double x, double y, double z);
+        Position(const Position& position);
 
         double x;
         double y;

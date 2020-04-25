@@ -20,3 +20,7 @@ obj/FootsketMatch.o
 obj/FootsketTeamCabuenes.o
 obj/FootsketTeamInmaculada.o
 obj/GameSystem.o
+obj/FootsketBall.o
+obj/FPSCounter.o
+obj/FPStateControlled.o
+obj/SDLMatchOverlay.o

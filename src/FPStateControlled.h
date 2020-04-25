@@ -1,15 +1,15 @@
-#ifndef _STATE_CONTROLLED_H
-#define _STATE_CONTROLLED_H
+#ifndef _FP_STATE_CONTROLLED_H
+#define _FP_STATE_CONTROLLED_H
 
 #include "IState.h"
 #include "IControl.h"
 
 class FootsketPlayer;
 
-class StateControlled: public IState
+class FPStateControlled: public IState
 {
     public:
-        StateControlled(FootsketPlayer& gameObject);
+        FPStateControlled(FootsketPlayer& gameObject);
 
         virtual bool Update(unsigned milis);
     protected:

@@ -11,6 +11,16 @@ Position& GameObject::GetCurrentPosition()
     return _CurrentPosition;
 }
 
+Position& GameObject::GetCurrentDirection()
+{
+    return _CurrentDirection;
+}
+
+double GameObject::GetCurrentSpeed()
+{
+    return _CurrentSpeed;
+}
+
 Animation& GameObject::GetCurrentAnimation()
 {
     return _CurrentAnimation;
@@ -24,6 +34,11 @@ IState& GameObject::GetCurrentState()
 void GameObject::SetCurrentState(IState& state)
 {
     _CurrentState = state;
+}
+
+void GameObject::SetCurrentSpeed(double speed)
+{
+    _CurrentSpeed = speed;
 }
 
 bool GameObject::Update(unsigned milis)

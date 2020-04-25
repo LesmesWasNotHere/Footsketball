@@ -1,22 +1,24 @@
-#include "StateControlled.h"
+#include "FPStateControlled.h"
 #include "FootsketPlayer.h"
 #include "GameSystem.h"
 
-StateControlled::StateControlled(FootsketPlayer& gameObject):_GameObject(gameObject),_LastControlState(0)
+FPStateControlled::FPStateControlled(FootsketPlayer& gameObject):_GameObject(gameObject),_LastControlState(0)
 {
 }
 
-bool StateControlled::Update(unsigned milis)
+bool FPStateControlled::Update(unsigned milis)
 {
     const double speed = 0.05;
     unsigned controlState =  GameSystem::ControlInstance().GetState();
 
     Position& p = _GameObject.GetCurrentPosition();
+    Position& direction = _GameObject.GetCurrentDirection();
+    direction.x = 0;
+    direction.y = 0;
 
     //Chech if some key is pressed
     if (controlState)
-    {
-        Position direction(0,0,0);
+    {    
         double coeficient = speed * milis;
 
         if (CONTROLS::LEFT & controlState) {
@@ -43,6 +45,8 @@ bool StateControlled::Update(unsigned milis)
         
         p.x += direction.x * coeficient;
         p.y += direction.y * coeficient;
+
+        _GameObject.SetCurrentSpeed(speed);
     }
     else
     {
@@ -56,7 +60,8 @@ bool StateControlled::Update(unsigned milis)
                     _GameObject.ActivateStopedLeftAnimation();
                 else
                     if (CONTROLS::RIGHT & _LastControlState) 
-                        _GameObject.ActivateStopedRightAnimation();            
+                        _GameObject.ActivateStopedRightAnimation();          
+        _GameObject.SetCurrentSpeed(0);  
     }
 
     _LastControlState = controlState;

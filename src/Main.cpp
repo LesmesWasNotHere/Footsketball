@@ -2,11 +2,13 @@
 #include "SDL2/SDL_image.h"
 #include "SDLKeyboardControl.h"
 #include "SDLSpriteCache.h"
+#include "SDLMatchOverlay.h"
 #include "Animation.h"
 #include "FootsketPlayer.h"
 #include "FootsketBall.h"
 #include "GameCoordinates.h"
 #include "GameSystem.h"
+#include "FPSCounter.h"
 #include <iostream>
 #include <functional>
 #include <algorithm>
@@ -62,6 +64,11 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
+    if (TTF_Init() == -1) {
+        std::cerr << "could not initialize sdl2_ttf: " << TTF_GetError();
+        return 1;
+    }
+
     //Create window 
     window = SDL_CreateWindow( "Footsketball!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN ); 
     
@@ -98,6 +105,8 @@ int main(int argc, char* args[]) {
 
     unsigned controlState;
 
+    SDLMatchOverlay overlay;
+
     while (true)
     {
         //Update SDL Events
@@ -125,6 +134,8 @@ int main(int argc, char* args[]) {
 
         for (it = objects.begin(); it != objects.end(); ++it)
             drawGameObject(**it);
+
+        overlay.Update(screenSurface, milisFrame);
 
         SDL_UpdateWindowSurface( window ); 
     }

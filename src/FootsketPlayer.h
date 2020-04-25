@@ -2,7 +2,7 @@
 #define _FOOTSKETPLAYER_H
 
 #include "GameObject.h"
-#include "StateControlled.h"
+#include "FPStateControlled.h"
 #include "IControl.h"
 
 class FootsketPlayer:public GameObject
@@ -34,7 +34,7 @@ class FootsketPlayer:public GameObject
         Animation _StopedLeftAnimation;
         Animation _StopedRightAnimation;
         //States:
-        StateControlled _StateControlled;
+        FPStateControlled _StateControlled;
 };
 
 #endif

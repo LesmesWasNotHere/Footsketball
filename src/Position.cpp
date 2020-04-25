@@ -13,6 +13,10 @@ Position::Position(double X, double Y, double Z)
     z = Z;
 }
 
+Position::Position(const Position& position):Position(position.x, position.y, position.x)
+{  
+}
+
 double Position::SquareDistance2D(Position position) const
 {
     double distX = (x - position.x);
