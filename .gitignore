@@ -24,3 +24,4 @@ obj/FootsketBall.o
 obj/FPSCounter.o
 obj/FPStateControlled.o
 obj/SDLMatchOverlay.o
+obj/FBStateNormal.o
