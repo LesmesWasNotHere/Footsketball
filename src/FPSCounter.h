@@ -15,6 +15,7 @@ class FPSCounter
         unsigned _Buffer[BUFFER_SIZE];
         unsigned _BufferPosition;
         unsigned _BufferSum;
+        unsigned _MinMilisFrame;
 };
 
 #endif
