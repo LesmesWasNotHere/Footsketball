@@ -107,6 +107,8 @@ int main(int argc, char* args[]) {
 
     SDLMatchOverlay overlay;
 
+    unsigned minMilisFrame = 20;
+
     while (true)
     {
         //Update SDL Events
@@ -138,6 +140,9 @@ int main(int argc, char* args[]) {
         overlay.Update(screenSurface, milisFrame);
 
         SDL_UpdateWindowSurface( window ); 
+
+        if (milisFrame < minMilisFrame)
+            SDL_Delay(minMilisFrame - milisFrame);
     }
 
     //Destroy window 
