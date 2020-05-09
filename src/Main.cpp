@@ -84,9 +84,9 @@ int main(int argc, char* args[]) {
 
     //Get window surface 
     screenSurface = SDL_GetWindowSurface( window ); 
-    int lastTicks =  SDL_GetTicks();
-    int frameTicks;
-    int milisFrame;
+    unsigned lastTicks =  SDL_GetTicks();
+    unsigned frameTicks;
+    unsigned milisFrame;
     double px = 0;
     double py = 0;
 
@@ -107,7 +107,7 @@ int main(int argc, char* args[]) {
 
     SDLMatchOverlay overlay;
 
-    unsigned minMilisFrame = 20;
+    unsigned minMilisFrame = 16;
 
     while (true)
     {
@@ -141,8 +141,10 @@ int main(int argc, char* args[]) {
 
         SDL_UpdateWindowSurface( window ); 
 
-        if (milisFrame < minMilisFrame)
-            SDL_Delay(minMilisFrame - milisFrame);
+        unsigned frameTimePassed = SDL_GetTicks() - frameTicks;
+
+        if (frameTimePassed < minMilisFrame)
+            SDL_Delay(minMilisFrame - frameTimePassed);
     }
 
     //Destroy window 
